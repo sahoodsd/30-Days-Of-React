@@ -1,14 +1,13 @@
-import React from 'react'
+import React, { Component } from 'react'
 import ReactDOM from 'react-dom/client'
 
+class App extends Component{
+    
+}
 
-const user = (
-    <div>
-    </div>
-)
 
 const rootElement = document.getElementById("root");
 
 // ReactDOM.render(jsxElement, rootElement)
 const root = ReactDOM.createRoot(rootElement);
-root.render(user);
+root.render(<App></App>);
