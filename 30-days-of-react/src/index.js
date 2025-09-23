@@ -1,35 +1,53 @@
-import React, { Component } from "react";
-import ReactDOM from "react-dom/client";
+import React, { Component } from 'react'
+import ReactDOM from 'react-dom/client'
 
-class App extends Component {
-  constructor(props) {
-    super(props);
-    console.log("I am the constructor and i will be th frist one run.");
-    this.state = {
-      firstName: "",
-    };
-  }
+class App extends Component{
+    constructor(props){
+        super(props)
+        this.state = {
+            firstName : 'jhon',
+            day : 1,
+            congratulate : ''
+        }
+    }
 
-  static getDerivedStateFromProps(props, state) {
-    console.log(
-      "I am getDerivedStateFromProps and I will be the second to run."
-    );
-    return null;
-  }
+    shouldComponentUpdate(nextProps,nextState){
+        if(nextState.day > 30){
+            return false
+        }
+        return true
+    }
 
-  componentDidMount() {
-    console.log("I am componentDidMount and I will be last to run.");
-  }
+    doChallange = () => {
+        this.setState({
+            day : this.state.day + 1
+        })
+    }
 
-  render() {
-    console.log("I am render and I will be the third to run.");
-    return (
-      <div className="App">
-        <h1>React Component Life Cycle</h1>
-      </div>
-    );
-  }
+    componentDidUpdate(prevProps,prevState) {
+        console.log('componentdidupdate::::',prevProps,prevState)
+        console.log(prevState.day)
+        if(prevState.day == 29){
+            this.setState({
+                congratulate : 'Challange Completed'
+            })
+        }
+    }
+
+    render(){
+        console.log(this.state)
+        return(
+            <div className='App'>
+                <h1>React component life cycle update stage</h1>
+                <button onClick={this.doChallange}>Do Challange</button>
+                <p>Challange day : {this.state.day}</p>
+                {this.state.congratulate && <h2>{this.state.congratulate}</h2>}
+            </div>
+        )
+    }
+    
 }
+
 
 const rootElement = document.getElementById("root");
 
